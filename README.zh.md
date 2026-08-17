@@ -86,6 +86,12 @@ node --test lib/
 - [DSH 插件生态倡议书 (plugin-ecosystem.md)](https://github.com/anywhere-labs/deepseek-harness-desktop/blob/master/docs/plugin-ecosystem.md) —— 本插件遵循的生态约定（组合优先、声明清晰、兼容优先）。
 - [DSH Desktop 插件开发 (plugin-development.md)](https://github.com/anywhere-labs/deepseek-harness-desktop/blob/master/docs/plugin-development.md) —— DSH 插件的编写与安装方式。
 
+## 关联上游 issue
+
+- [anywhere-labs/deepseek-harness-desktop#156](https://github.com/anywhere-labs/deepseek-harness-desktop/issues/156) —— macOS：Desktop 启动的 Agent shell 未继承用户 shell PATH（正是本插件修复的问题；上游仍 open，暂无官方修复）。
+- [anywhere-labs/deepseek-harness-desktop#116](https://github.com/anywhere-labs/deepseek-harness-desktop/issues/116) —— 宿主进程内插件无法执行 dsh（Windows，标签 `pending release`）。
+- [anywhere-labs/deepseek-harness-desktop#77](https://github.com/anywhere-labs/deepseek-harness-desktop/issues/77) —— dsh 仅存在于托盘的 Open DSH Terminal，属设计如此；Desktop 不写入系统 PATH。
+
 ## 许可
 
 MIT — 见 [LICENSE](LICENSE)。

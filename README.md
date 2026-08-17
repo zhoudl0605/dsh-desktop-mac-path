@@ -128,6 +128,12 @@ following the [DSH "配置与发布" conventions](https://deepseekdocs.com/docs/
 - [DSH Desktop Plugin Development (plugin-development.en.md)](https://github.com/anywhere-labs/deepseek-harness-desktop/blob/master/docs/plugin-development.en.md) — how DSH plugins are written and installed.
 - [DSH 插件生态倡议书 (plugin-ecosystem.md)](https://github.com/anywhere-labs/deepseek-harness-desktop/blob/master/docs/plugin-ecosystem.md) — 中文版。
 
+## Related upstream issues
+
+- [anywhere-labs/deepseek-harness-desktop#156](https://github.com/anywhere-labs/deepseek-harness-desktop/issues/156) — macOS: agent shell launched from Desktop does not inherit the user shell PATH (the exact problem this plugin fixes; open upstream, no official fix yet).
+- [anywhere-labs/deepseek-harness-desktop#116](https://github.com/anywhere-labs/deepseek-harness-desktop/issues/116) — `dsh` invisible to plugins inside the host process (Windows; label `pending release`).
+- [anywhere-labs/deepseek-harness-desktop#77](https://github.com/anywhere-labs/deepseek-harness-desktop/issues/77) — `dsh` is only available in the tray's Open DSH Terminal by design; Desktop never writes to the system PATH.
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
