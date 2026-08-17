@@ -1,0 +1,99 @@
+# dsh-plugin-desktop-path
+
+Restore the **login-shell PATH** for agent shell commands running inside a
+GUI-launched DSH host (DSH Desktop, `dsh web` started from Finder/Dock).
+
+## The problem
+
+macOS launches GUI applications with a minimal PATH
+(`/usr/bin:/bin:/usr/sbin:/sbin`) because they never source the shell
+profiles that run `path_helper`. DSH's bash tool inherits the host process
+environment, so CLI tools installed under Homebrew — `/opt/homebrew/bin/gh`,
+`node`, `git-lfs`, … — are invisible to agent commands, even though your
+Terminal works fine:
+
+```
+$ gh --version
+bash: gh: command not found
+```
+
+## What this plugin does
+
+When it loads, the plugin prepends the missing directories to
+`process.env.PATH`:
+
+1. **System entries** (macOS only, on by default): replicates `path_helper`
+   by reading `/etc/paths` and every file in `/etc/paths.d/` (sorted by
+   name) — exactly the directories your Terminal would have.
+2. **Configured entries**: `extraPaths` for anything else
+   (`/opt/homebrew/bin` on Apple Silicon, `/usr/local/bin` on Intel, …).
+
+DSH's subprocess service snapshots `process.env` for every spawn
+(`scrubbedParentEnv()`), so **every subsequent agent command** sees the
+restored PATH. No system configuration, shell profile, or launchd setting is
+touched, and the fix is idempotent — re-running it never duplicates entries.
+
+## Install
+
+Requires DSH Desktop (or a `dsh` CLI with a `desktop` profile). From the
+DSH Desktop tray, open **Open DSH Terminal** and run:
+
+```sh
+# once published to npm
+dsh plugin --profile desktop add dsh-plugin-desktop-path
+
+# or straight from this repository
+dsh plugin --profile desktop add github:zhoudl0605/dsh-plugin-desktop-path
+```
+
+Then **restart DSH Desktop** so the plugin enters the Loader composition.
+Verify inside any agent conversation:
+
+```
+$ which gh
+/opt/homebrew/bin/gh
+```
+
+## Configuration
+
+The plugin works with zero configuration on Apple Silicon (it picks up
+`/etc/paths.d/homebrew` automatically). To add or adjust entries, configure
+it in your profile's `cordis.patch.yml` (see the [DSH plugin
+documentation](https://github.com/anywhere-labs/deepseek-harness-desktop/blob/master/docs/plugin-development.md)):
+
+```yaml
+- id: desktop-path
+  config:
+    extraPaths:
+      - /opt/homebrew/bin
+    restoreSystemPaths: true
+```
+
+| Option | Type | Default | Description |
+| --- | --- | --- | --- |
+| `extraPaths` | `string[]` | `[]` | Directories to prepend, in order, after system entries. |
+| `restoreSystemPaths` | `boolean` | `true` | Replicate `path_helper` from `/etc/paths` + `/etc/paths.d/` (darwin only). |
+
+## How it works (for reviewers)
+
+- `apply()` runs in the DSH **host** process when the plugin loads — the same
+  process that spawns the agent's `bash -c` commands.
+- `applyPathFix()` merges `collectPathDirs()` (system + configured) into
+  `process.env.PATH`, prepending only directories that are not already
+  present.
+- `dsh-subprocess`'s `scrubbedParentEnv()` re-reads `process.env` at every
+  spawn, so no executor change is required.
+
+## Development
+
+```sh
+node --test lib/
+```
+
+No build step and zero runtime dependencies — the `@deepseek-ai/*` packages
+are not published to the public npm registry, so this plugin deliberately
+never imports them at runtime.
+
+## License
+
+MIT — see [LICENSE](LICENSE).

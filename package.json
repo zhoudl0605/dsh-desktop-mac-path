@@ -1,0 +1,40 @@
+{
+  "name": "dsh-plugin-desktop-path",
+  "version": "0.1.0",
+  "description": "Restore the login-shell PATH (Homebrew, /etc/paths.d, ...) for agent shell commands in GUI-launched DSH Desktop hosts",
+  "license": "MIT",
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/**",
+    "README.md",
+    "README.zh.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node --test lib/"
+  },
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "path",
+    "homebrew",
+    "desktop"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhoudl0605/dsh-plugin-desktop-path.git"
+  }
+}
