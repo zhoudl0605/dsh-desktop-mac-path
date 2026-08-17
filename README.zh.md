@@ -28,6 +28,8 @@ bash: gh: command not found
 
 DSH 的 subprocess 服务每次 spawn 都会重新快照 `process.env`（`scrubbedParentEnv()`），所以**之后所有的 agent 命令**都能看到恢复后的 PATH。不改系统配置、不动 shell profile、不碰 launchd，且幂等——重复执行不会产生重复条目。
 
+**工具不存在也完全无害。** 不存在的目录、或者不是目录的条目——比如没装 Homebrew 的机器、`extraPaths` 指向未安装的工具链（nvm、cargo 等）、`/etc/paths.d` 里引用已被删除的目录——都会被自动跳过。插件永远不会因此失败，PATH 也不会残留无效条目。
+
 ## 安装
 
 需要 DSH Desktop（或带 `desktop` profile 的 `dsh` CLI）。从 DSH Desktop 托盘选择 **Open DSH Terminal**，然后：
@@ -37,7 +39,7 @@ DSH 的 subprocess 服务每次 spawn 都会重新快照 `process.env`（`scrubb
 dsh plugin --profile desktop add dsh-desktop-mac-path
 
 # 或固定到最新 release 标签
-dsh plugin --profile desktop add github:zhoudl0605/dsh-desktop-mac-path#v0.1.1
+dsh plugin --profile desktop add github:zhoudl0605/dsh-desktop-mac-path#v0.1.2
 ```
 
 然后**重启 DSH Desktop**，让插件进入 Loader 组合。在任意 agent 会话里验证：

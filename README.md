@@ -53,6 +53,12 @@ DSH's subprocess service snapshots `process.env` for every spawn
 restored PATH. No system configuration, shell profile, or launchd setting is
 touched, and the fix is idempotent — re-running it never duplicates entries.
 
+**Missing toolchains are harmless.** Entries that do not exist or are not
+directories — a machine without Homebrew, an `extraPaths` entry pointing at
+an uninstalled toolchain (nvm, cargo, …), a `/etc/paths.d` file referencing a
+removed directory — are skipped automatically. The plugin never fails, and
+PATH stays free of dangling entries.
+
 ## Install
 
 Requires DSH Desktop (or a `dsh` CLI with a `desktop` profile). From the
@@ -63,7 +69,7 @@ DSH Desktop tray, open **Open DSH Terminal** and run:
 dsh plugin --profile desktop add dsh-desktop-mac-path
 
 # or pinned to the latest release tag
-dsh plugin --profile desktop add github:zhoudl0605/dsh-desktop-mac-path#v0.1.1
+dsh plugin --profile desktop add github:zhoudl0605/dsh-desktop-mac-path#v0.1.2
 ```
 
 Then **restart DSH Desktop** so the plugin enters the Loader composition.
