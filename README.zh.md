@@ -72,6 +72,11 @@ node --test lib/
 
 无构建步骤，运行时零依赖——`@deepseek-ai/*` 包未发布到公共 npm registry，所以本插件刻意不在运行时 import 它们。
 
+## 参考
+
+- [DSH 插件生态倡议书 (plugin-ecosystem.md)](https://github.com/anywhere-labs/deepseek-harness-desktop/blob/master/docs/plugin-ecosystem.md) —— 本插件遵循的生态约定（组合优先、声明清晰、兼容优先）。
+- [DSH Desktop 插件开发 (plugin-development.md)](https://github.com/anywhere-labs/deepseek-harness-desktop/blob/master/docs/plugin-development.md) —— DSH 插件的编写与安装方式。
+
 ## 许可
 
 MIT — 见 [LICENSE](LICENSE)。

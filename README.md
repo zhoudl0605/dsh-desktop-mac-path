@@ -103,6 +103,11 @@ No build step and zero runtime dependencies — the `@deepseek-ai/*` packages
 are not published to the public npm registry, so this plugin deliberately
 never imports them at runtime.
 
+## References
+
+- [DSH 插件生态倡议书 (plugin-ecosystem.md)](https://github.com/anywhere-labs/deepseek-harness-desktop/blob/master/docs/plugin-ecosystem.md) — the ecosystem conventions this plugin follows (composition-first, clear declarations, compatibility-first).
+- [DSH Desktop 插件开发 (plugin-development.md)](https://github.com/anywhere-labs/deepseek-harness-desktop/blob/master/docs/plugin-development.md) — how DSH plugins are written and installed.
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
