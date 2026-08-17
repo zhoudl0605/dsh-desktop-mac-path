@@ -1,5 +1,5 @@
 /**
- * dsh-mac-path type declarations.
+ * dshd-mac-path type declarations.
  * The plugin has zero runtime dependencies; types are hand-written.
  */
 

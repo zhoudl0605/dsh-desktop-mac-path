@@ -1,7 +1,7 @@
 {
-  "name": "dsh-mac-path",
+  "name": "dshd-mac-path",
   "version": "0.1.0",
-  "description": "Restore the macOS login-shell PATH (Homebrew, /etc/paths.d, ...) for agent shell commands in GUI-launched DSH Desktop hosts",
+  "description": "DSH Desktop on macOS: restore the login-shell PATH (Homebrew, /etc/paths.d, ...) for agent shell commands in GUI-launched hosts",
   "license": "MIT",
   "type": "module",
   "main": "lib/index.js",
@@ -35,6 +35,6 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zhoudl0605/dsh-mac-path.git"
+    "url": "git+https://github.com/zhoudl0605/dshd-mac-path.git"
   }
 }

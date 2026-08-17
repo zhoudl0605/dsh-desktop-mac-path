@@ -1,6 +1,6 @@
-# dsh-mac-path
+# dshd-mac-path
 
-为 GUI 方式启动的 DSH 宿主（DSH Desktop、从 Finder/Dock 启动的 `dsh web`）中的 agent 命令行**恢复 macOS 登录 shell 的 PATH**（Homebrew、`/etc/paths.d` 等）。
+**仅限 macOS 上的 DSH Desktop。** 为 DSH Desktop 中的 agent 命令行**恢复 macOS 登录 shell 的 PATH**（Homebrew、`/etc/paths.d` 等）。
 
 ## 问题（macOS 独有）
 
@@ -28,10 +28,10 @@ DSH 的 subprocess 服务每次 spawn 都会重新快照 `process.env`（`scrubb
 
 ```sh
 # 发布到 npm 后
-dsh plugin --profile desktop add dsh-mac-path
+dsh plugin --profile desktop add dshd-mac-path
 
 # 或直接从本仓库安装
-dsh plugin --profile desktop add github:zhoudl0605/dsh-mac-path
+dsh plugin --profile desktop add github:zhoudl0605/dshd-mac-path
 ```
 
 然后**重启 DSH Desktop**，让插件进入 Loader 组合。在任意 agent 会话里验证：

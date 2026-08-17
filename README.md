@@ -1,8 +1,8 @@
-# dsh-mac-path
+# dshd-mac-path
 
-Restore the **macOS login-shell PATH** (Homebrew, `/etc/paths.d`, …) for
-agent shell commands running inside a GUI-launched DSH host (DSH Desktop,
-`dsh web` started from Finder/Dock, …).
+**DSH Desktop on macOS only.** Restore the **macOS login-shell PATH**
+(Homebrew, `/etc/paths.d`, …) for agent shell commands running inside
+GUI-launched DSH Desktop hosts.
 
 ## The problem (macOS-specific)
 
@@ -49,10 +49,10 @@ DSH Desktop tray, open **Open DSH Terminal** and run:
 
 ```sh
 # once published to npm
-dsh plugin --profile desktop add dsh-mac-path
+dsh plugin --profile desktop add dshd-mac-path
 
 # or straight from this repository
-dsh plugin --profile desktop add github:zhoudl0605/dsh-mac-path
+dsh plugin --profile desktop add github:zhoudl0605/dshd-mac-path
 ```
 
 Then **restart DSH Desktop** so the plugin enters the Loader composition.
