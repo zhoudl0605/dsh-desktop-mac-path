@@ -1,8 +1,12 @@
-# dshd-mac-path
+# dsh-desktop-mac-path
 
 [English](README.md) | [中文](README.zh.md)
 
-**仅限 macOS 上的 DSH Desktop。** 为 DSH Desktop 中的 agent 命令行**恢复 macOS 登录 shell 的 PATH**（Homebrew、`/etc/paths.d` 等）。
+**专为 macOS 上的 DSH Desktop 打造的修复插件。** 为 DSH Desktop 中的 agent 命令行**恢复 macOS 登录 shell 的 PATH**（Homebrew、`/etc/paths.d` 等）。
+
+## 关于 DSH Desktop
+
+本插件是专为 **DSH Desktop** 打造的第三方修复插件。DSH Desktop 是 DeepSeek Harness (DSH) 的桌面客户端，由 [anywhere-labs/deepseek-harness-desktop](https://github.com/anywhere-labs/deepseek-harness-desktop) 项目构建（"万物皆插件，桌面本身也是插件"）。只有在 **macOS** 上通过 Finder/Dock 启动 DSH Desktop 时才需要本插件（见下文[问题](#问题macos-独有)）。
 
 ## 问题（macOS 独有）
 
@@ -30,10 +34,10 @@ DSH 的 subprocess 服务每次 spawn 都会重新快照 `process.env`（`scrubb
 
 ```sh
 # 发布到 npm 后
-dsh plugin --profile desktop add dshd-mac-path
+dsh plugin --profile desktop add dsh-desktop-mac-path
 
 # 或直接从本仓库安装
-dsh plugin --profile desktop add github:zhoudl0605/dshd-mac-path
+dsh plugin --profile desktop add github:zhoudl0605/dsh-desktop-mac-path
 ```
 
 然后**重启 DSH Desktop**，让插件进入 Loader 组合。在任意 agent 会话里验证：
@@ -48,7 +52,7 @@ $ which gh
 Apple Silicon 上零配置即可用（会自动读取 `/etc/paths.d/homebrew`）。需要增删条目时，在 profile 的 `cordis.patch.yml` 里配置（见 [DSH 插件开发文档](https://github.com/anywhere-labs/deepseek-harness-desktop/blob/master/docs/plugin-development.md)）：
 
 ```yaml
-- id: mac-path
+- id: desktop-mac-path
   config:
     extraPaths:
       - /opt/homebrew/bin

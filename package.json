@@ -1,7 +1,7 @@
 {
-  "name": "dshd-mac-path",
+  "name": "dsh-desktop-mac-path",
   "version": "0.1.0",
-  "description": "DSH Desktop on macOS: restore the login-shell PATH (Homebrew, /etc/paths.d, ...) for agent shell commands in GUI-launched hosts",
+  "description": "Fixer plugin dedicated to DSH Desktop on macOS: restore the login-shell PATH (Homebrew, /etc/paths.d, ...) for agent shell commands in GUI-launched hosts",
   "license": "MIT",
   "type": "module",
   "main": "lib/index.js",
@@ -29,12 +29,13 @@
     "deepseek-harness",
     "dsh",
     "dsh-plugin",
+    "desktop",
     "macos",
     "path",
     "homebrew"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zhoudl0605/dshd-mac-path.git"
+    "url": "git+https://github.com/zhoudl0605/dsh-desktop-mac-path.git"
   }
 }

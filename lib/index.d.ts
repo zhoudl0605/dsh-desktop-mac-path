@@ -1,9 +1,9 @@
 /**
- * dshd-mac-path type declarations.
+ * dsh-desktop-mac-path type declarations.
  * The plugin has zero runtime dependencies; types are hand-written.
  */
 
-export declare const name: "mac-path";
+export declare const name: "desktop-mac-path";
 export declare const inject: never[];
 
 export interface MacPathConfig {

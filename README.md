@@ -1,10 +1,19 @@
-# dshd-mac-path
+# dsh-desktop-mac-path
 
 [English](README.md) | [中文](README.zh.md)
 
-**DSH Desktop on macOS only.** Restore the **macOS login-shell PATH**
-(Homebrew, `/etc/paths.d`, …) for agent shell commands running inside
-GUI-launched DSH Desktop hosts.
+**A fixer plugin dedicated to DSH Desktop on macOS.** Restore the **macOS
+login-shell PATH** (Homebrew, `/etc/paths.d`, …) for agent shell commands
+running inside GUI-launched DSH Desktop hosts.
+
+## About DSH Desktop
+
+This plugin is a third-party fixer dedicated to **DSH Desktop** — the
+desktop client for DeepSeek Harness (DSH), built by the
+[anywhere-labs/deepseek-harness-desktop](https://github.com/anywhere-labs/deepseek-harness-desktop)
+project ("everything is a plugin; the desktop itself is a plugin"). You only
+need this fixer when DSH Desktop runs **on macOS** and is launched from
+Finder/Dock (see [The problem](#the-problem-macos-specific) below).
 
 ## The problem (macOS-specific)
 
@@ -51,10 +60,10 @@ DSH Desktop tray, open **Open DSH Terminal** and run:
 
 ```sh
 # once published to npm
-dsh plugin --profile desktop add dshd-mac-path
+dsh plugin --profile desktop add dsh-desktop-mac-path
 
 # or straight from this repository
-dsh plugin --profile desktop add github:zhoudl0605/dshd-mac-path
+dsh plugin --profile desktop add github:zhoudl0605/dsh-desktop-mac-path
 ```
 
 Then **restart DSH Desktop** so the plugin enters the Loader composition.
@@ -73,7 +82,7 @@ it in your profile's `cordis.patch.yml` (see the [DSH plugin
 documentation](https://github.com/anywhere-labs/deepseek-harness-desktop/blob/master/docs/plugin-development.md)):
 
 ```yaml
-- id: mac-path
+- id: desktop-mac-path
   config:
     extraPaths:
       - /opt/homebrew/bin
