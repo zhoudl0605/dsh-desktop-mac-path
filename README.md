@@ -1,5 +1,7 @@
 # dshd-mac-path
 
+[English](README.md) | [中文](README.zh.md)
+
 **DSH Desktop on macOS only.** Restore the **macOS login-shell PATH**
 (Homebrew, `/etc/paths.d`, …) for agent shell commands running inside
 GUI-launched DSH Desktop hosts.
@@ -105,8 +107,9 @@ never imports them at runtime.
 
 ## References
 
-- [DSH 插件生态倡议书 (plugin-ecosystem.md)](https://github.com/anywhere-labs/deepseek-harness-desktop/blob/master/docs/plugin-ecosystem.md) — the ecosystem conventions this plugin follows (composition-first, clear declarations, compatibility-first).
-- [DSH Desktop 插件开发 (plugin-development.md)](https://github.com/anywhere-labs/deepseek-harness-desktop/blob/master/docs/plugin-development.md) — how DSH plugins are written and installed.
+- [DSH Plugin Ecosystem (plugin-ecosystem.en.md)](https://github.com/anywhere-labs/deepseek-harness-desktop/blob/master/docs/plugin-ecosystem.en.md) — the ecosystem conventions this plugin follows (composition-first, clear declarations, compatibility-first).
+- [DSH Desktop Plugin Development (plugin-development.en.md)](https://github.com/anywhere-labs/deepseek-harness-desktop/blob/master/docs/plugin-development.en.md) — how DSH plugins are written and installed.
+- [DSH 插件生态倡议书 (plugin-ecosystem.md)](https://github.com/anywhere-labs/deepseek-harness-desktop/blob/master/docs/plugin-ecosystem.md) — 中文版。
 
 ## License
 

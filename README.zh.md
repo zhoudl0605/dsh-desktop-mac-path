@@ -1,5 +1,7 @@
 # dshd-mac-path
 
+[English](README.md) | [中文](README.zh.md)
+
 **仅限 macOS 上的 DSH Desktop。** 为 DSH Desktop 中的 agent 命令行**恢复 macOS 登录 shell 的 PATH**（Homebrew、`/etc/paths.d` 等）。
 
 ## 问题（macOS 独有）
