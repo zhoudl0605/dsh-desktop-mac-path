@@ -93,6 +93,7 @@ node --test lib/
 ## 关联上游 issue
 
 - [anywhere-labs/deepseek-harness-desktop#156](https://github.com/anywhere-labs/deepseek-harness-desktop/issues/156) —— macOS：Desktop 启动的 Agent shell 未继承用户 shell PATH（正是本插件修复的问题）。上游 issue 仍 open，但官方修复已在途：[PR #158](https://github.com/anywhere-labs/deepseek-harness-desktop/pull/158)（"recover login-shell PATH for packaged Unix launches"，未合并）。本插件**今天就解决问题**；PR #158 落地后插件自动变为幂等 no-op，且 `addDesktopDsh` 依然有用——PR #158 只恢复登录 PATH，不含 Desktop 私有 CLI shim。
+- [anywhere-labs/deepseek-harness-desktop#143](https://github.com/anywhere-labs/deepseek-harness-desktop/issues/143) —— macOS：Desktop 内会话 shell 工具不可用（同一根因的早期报告，PR #158 也关联它）。
 - [anywhere-labs/deepseek-harness-desktop#116](https://github.com/anywhere-labs/deepseek-harness-desktop/issues/116) —— 宿主进程内插件无法执行 dsh（Windows，标签 `pending release`）。
 - [anywhere-labs/deepseek-harness-desktop#77](https://github.com/anywhere-labs/deepseek-harness-desktop/issues/77) —— dsh 仅存在于托盘的 Open DSH Terminal，属设计如此；Desktop 不写入系统 PATH。
 

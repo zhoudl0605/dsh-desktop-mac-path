@@ -147,6 +147,7 @@ following the [DSH "配置与发布" conventions](https://deepseekdocs.com/docs/
 ## Related upstream issues
 
 - [anywhere-labs/deepseek-harness-desktop#156](https://github.com/anywhere-labs/deepseek-harness-desktop/issues/156) — macOS: agent shell launched from Desktop does not inherit the user shell PATH (the exact problem this plugin fixes). The upstream issue is still open, but an official fix is in progress as [PR #158](https://github.com/anywhere-labs/deepseek-harness-desktop/pull/158) ("recover login-shell PATH for packaged Unix launches", unmerged). This plugin solves the problem **today**; once PR #158 lands it becomes an idempotent no-op, and `addDesktopDsh` stays useful because PR #158 only restores the login PATH, not the Desktop's private CLI shims.
+- [anywhere-labs/deepseek-harness-desktop#143](https://github.com/anywhere-labs/deepseek-harness-desktop/issues/143) — macOS: session shell tools unusable inside Desktop (same root cause, earlier report; also referenced by PR #158).
 - [anywhere-labs/deepseek-harness-desktop#116](https://github.com/anywhere-labs/deepseek-harness-desktop/issues/116) — `dsh` invisible to plugins inside the host process (Windows; label `pending release`).
 - [anywhere-labs/deepseek-harness-desktop#77](https://github.com/anywhere-labs/deepseek-harness-desktop/issues/77) — `dsh` is only available in the tray's Open DSH Terminal by design; Desktop never writes to the system PATH.
 
