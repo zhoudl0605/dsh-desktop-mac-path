@@ -37,7 +37,7 @@ DSH 的 subprocess 服务每次 spawn 都会重新快照 `process.env`（`scrubb
 dsh plugin --profile desktop add dsh-desktop-mac-path
 
 # 或固定到最新 release 标签
-dsh plugin --profile desktop add github:zhoudl0605/dsh-desktop-mac-path#v0.1.0
+dsh plugin --profile desktop add github:zhoudl0605/dsh-desktop-mac-path#v0.1.1
 ```
 
 然后**重启 DSH Desktop**，让插件进入 Loader 组合。在任意 agent 会话里验证：

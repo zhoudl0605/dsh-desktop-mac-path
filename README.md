@@ -63,7 +63,7 @@ DSH Desktop tray, open **Open DSH Terminal** and run:
 dsh plugin --profile desktop add dsh-desktop-mac-path
 
 # or pinned to the latest release tag
-dsh plugin --profile desktop add github:zhoudl0605/dsh-desktop-mac-path#v0.1.0
+dsh plugin --profile desktop add github:zhoudl0605/dsh-desktop-mac-path#v0.1.1
 ```
 
 Then **restart DSH Desktop** so the plugin enters the Loader composition.

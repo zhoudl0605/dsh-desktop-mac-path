@@ -1,0 +1,9 @@
+# Bundle patch for dsh-desktop-mac-path.
+#
+# Declared via package.json "dsh": { "bundle": { "patch": "./cordis.patch.yml" } },
+# so `dsh plugin add` reconciles this package into the profile's
+# dsh.profile.bundles layer stack and DSH Desktop loads it on next boot.
+# See https://deepseekdocs.com/docs/learn/dev/config-publish
+- insert:
+    - id: desktop-mac-path
+      name: dsh-desktop-mac-path
