@@ -41,10 +41,14 @@ the systemd user-session PATH).
 When it loads, the plugin prepends the missing directories to
 `process.env.PATH`:
 
-1. **System entries** (macOS only, on by default): replicates `path_helper`
+1. **Desktop CLI shims** (macOS only, on by default): the active profile's
+   `<userData>/cli/<sha256(profile)>/bin` — the same `dsh`, `pnpm` and `node`
+   shims the tray's "Open DSH Terminal" uses — so agent commands can run
+   `dsh plugin …` directly. Skipped when the shims were never generated.
+2. **System entries** (macOS only, on by default): replicates `path_helper`
    by reading `/etc/paths` and every file in `/etc/paths.d/` (sorted by
    name) — exactly the directories your Terminal would have.
-2. **Configured entries**: `extraPaths` for anything else
+3. **Configured entries**: `extraPaths` for anything else
    (`/opt/homebrew/bin` on Apple Silicon, `/usr/local/bin` on Intel, …),
    which is also the only mechanism used on non-macOS platforms.
 
@@ -56,8 +60,17 @@ touched, and the fix is idempotent — re-running it never duplicates entries.
 **Missing toolchains are harmless.** Entries that do not exist or are not
 directories — a machine without Homebrew, an `extraPaths` entry pointing at
 an uninstalled toolchain (nvm, cargo, …), a `/etc/paths.d` file referencing a
-removed directory — are skipped automatically. The plugin never fails, and
-PATH stays free of dangling entries.
+removed directory, or shims that were never generated — are skipped
+automatically. The plugin never fails, and PATH stays free of dangling
+entries.
+
+> **Outside the app, `dsh` stays invisible by design.** DSH Desktop never
+> writes its shims to the system PATH (upstream issue
+> [#77](https://github.com/anywhere-labs/deepseek-harness-desktop/issues/77));
+> this plugin follows the same rule and only makes them visible to agent
+> commands inside the host. If you want `dsh` in your own Terminal, add the
+> printed shim directory to your shell profile yourself — see
+> `dsh --help` inside the tray terminal.
 
 ## Install
 
@@ -69,7 +82,7 @@ DSH Desktop tray, open **Open DSH Terminal** and run:
 dsh plugin --profile desktop add dsh-desktop-mac-path
 
 # or pinned to the latest release tag
-dsh plugin --profile desktop add github:zhoudl0605/dsh-desktop-mac-path#v0.1.2
+dsh plugin --profile desktop add github:zhoudl0605/dsh-desktop-mac-path#v0.2.0
 ```
 
 Then **restart DSH Desktop** so the plugin enters the Loader composition.
@@ -99,6 +112,7 @@ documentation](https://github.com/anywhere-labs/deepseek-harness-desktop/blob/ma
 | --- | --- | --- | --- |
 | `extraPaths` | `string[]` | `[]` | Directories to prepend, in order, after system entries. |
 | `restoreSystemPaths` | `boolean` | `true` | Replicate `path_helper` from `/etc/paths` + `/etc/paths.d/` (darwin only). |
+| `addDesktopDsh` | `boolean` | `true` | Prepend the active profile's Desktop CLI shim dir (`dsh`/`pnpm`/`node`) when it exists (darwin only). |
 
 ## How it works (for reviewers)
 

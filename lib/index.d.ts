@@ -11,9 +11,12 @@ export declare const inject: never[];
 export declare const Config: z.ObjectType<{
 	extraPaths: z.ArrayType<z.StringType>;
 	restoreSystemPaths: z.BooleanType;
+	addDesktopDsh: z.BooleanType;
 }>;
 
 export interface MacPathConfig {
+	/** Prepend the active profile's Desktop CLI shim dir (`dsh`/`pnpm`/`node`) when it exists. Defaults to true. */
+	addDesktopDsh?: boolean;
 	/** Replicate `path_helper` from `/etc/paths` + `/etc/paths.d/` (darwin only). Defaults to true. */
 	restoreSystemPaths?: boolean;
 	/** Extra directories to prepend, in order, after any system entries. */
@@ -21,6 +24,8 @@ export interface MacPathConfig {
 }
 
 export declare function systemPathDirs(): string[];
+
+export declare function desktopDshBinDirs(baseDir?: string): string[];
 
 export declare function collectPathDirs(config?: MacPathConfig): string[];
 

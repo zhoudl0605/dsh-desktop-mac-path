@@ -1,6 +1,6 @@
 {
   "name": "dsh-desktop-mac-path",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Fixer plugin dedicated to DSH Desktop on macOS: restore the login-shell PATH (Homebrew, /etc/paths.d, ...) for agent shell commands in GUI-launched hosts",
   "license": "MIT",
   "type": "module",

@@ -23,12 +23,15 @@ bash: gh: command not found
 
 插件加载时把缺失的目录前置到 `process.env.PATH`：
 
-1. **系统条目**（仅 macOS，默认开启）：复刻 `path_helper` 的行为，读取 `/etc/paths` 和 `/etc/paths.d/` 下所有文件（按文件名排序）——也就是你终端里会有的那些目录。
-2. **配置条目**：`extraPaths` 补充其它目录（Apple Silicon 用 `/opt/homebrew/bin`，Intel 用 `/usr/local/bin` 等）；非 macOS 平台上这是唯一生效的机制。
+1. **Desktop CLI shim**（仅 macOS，默认开启）：当前 profile 的 `<userData>/cli/<sha256(profile)>/bin`——也就是托盘 Open DSH Terminal 用的那套 `dsh`/`pnpm`/`node`——让 agent 命令可以直接执行 `dsh plugin …`。shim 还没生成过时自动跳过。
+2. **系统条目**（仅 macOS，默认开启）：复刻 `path_helper` 的行为，读取 `/etc/paths` 和 `/etc/paths.d/` 下所有文件（按文件名排序）——也就是你终端里会有的那些目录。
+3. **配置条目**：`extraPaths` 补充其它目录（Apple Silicon 用 `/opt/homebrew/bin`，Intel 用 `/usr/local/bin` 等）；非 macOS 平台上这是唯一生效的机制。
 
 DSH 的 subprocess 服务每次 spawn 都会重新快照 `process.env`（`scrubbedParentEnv()`），所以**之后所有的 agent 命令**都能看到恢复后的 PATH。不改系统配置、不动 shell profile、不碰 launchd，且幂等——重复执行不会产生重复条目。
 
-**工具不存在也完全无害。** 不存在的目录、或者不是目录的条目——比如没装 Homebrew 的机器、`extraPaths` 指向未安装的工具链（nvm、cargo 等）、`/etc/paths.d` 里引用已被删除的目录——都会被自动跳过。插件永远不会因此失败，PATH 也不会残留无效条目。
+**工具不存在也完全无害。** 不存在的目录、或者不是目录的条目——比如没装 Homebrew 的机器、`extraPaths` 指向未安装的工具链（nvm、cargo 等）、`/etc/paths.d` 里引用已被删除的目录、shim 还没生成——都会被自动跳过。插件永远不会因此失败，PATH 也不会残留无效条目。
+
+> **App 之外 `dsh` 依然不可见，这是设计如此。** DSH Desktop 从不把 shim 写入系统 PATH（上游 [issue #77](https://github.com/anywhere-labs/deepseek-harness-desktop/issues/77)）；本插件遵循同一规则，只让宿主内的 agent 命令可见。如果你想在自己的终端里用 `dsh`，请在托盘终端的欢迎信息里找到 shim 目录，自行加入 shell profile。
 
 ## 安装
 
@@ -39,7 +42,7 @@ DSH 的 subprocess 服务每次 spawn 都会重新快照 `process.env`（`scrubb
 dsh plugin --profile desktop add dsh-desktop-mac-path
 
 # 或固定到最新 release 标签
-dsh plugin --profile desktop add github:zhoudl0605/dsh-desktop-mac-path#v0.1.2
+dsh plugin --profile desktop add github:zhoudl0605/dsh-desktop-mac-path#v0.2.0
 ```
 
 然后**重启 DSH Desktop**，让插件进入 Loader 组合。在任意 agent 会话里验证：
@@ -65,6 +68,7 @@ Apple Silicon 上零配置即可用（会自动读取 `/etc/paths.d/homebrew`）
 | --- | --- | --- | --- |
 | `extraPaths` | `string[]` | `[]` | 要前置的目录，按顺序排在系统条目之后。 |
 | `restoreSystemPaths` | `boolean` | `true` | 从 `/etc/paths` + `/etc/paths.d/` 复刻 `path_helper`（仅 darwin）。 |
+| `addDesktopDsh` | `boolean` | `true` | 存在时前置当前 profile 的 Desktop CLI shim 目录（`dsh`/`pnpm`/`node`，仅 darwin）。 |
 
 ## 工作原理（供审查）
 
