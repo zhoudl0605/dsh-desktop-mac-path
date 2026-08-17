@@ -31,7 +31,7 @@ DSH 的 subprocess 服务每次 spawn 都会重新快照 `process.env`（`scrubb
 
 **工具不存在也完全无害。** 不存在的目录、或者不是目录的条目——比如没装 Homebrew 的机器、`extraPaths` 指向未安装的工具链（nvm、cargo 等）、`/etc/paths.d` 里引用已被删除的目录、shim 还没生成——都会被自动跳过。插件永远不会因此失败，PATH 也不会残留无效条目。
 
-> **App 之外 `dsh` 依然不可见，这是设计如此。** DSH Desktop 从不把 shim 写入系统 PATH（上游 [issue #77](https://github.com/anywhere-labs/deepseek-harness-desktop/issues/77)）；本插件遵循同一规则，只让宿主内的 agent 命令可见。如果你想在自己的终端里用 `dsh`，请在托盘终端的欢迎信息里找到 shim 目录，自行加入 shell profile。
+> **App 之外 `dsh` 依然不可见，这是设计如此。** DSH Desktop 从不把 shim 写入系统 PATH（上游 [issue #77](https://github.com/anywhere-labs/deepseek-harness-desktop/issues/77)）；本插件遵循同一规则，只让宿主内的 agent 命令可见。想在**你自己的终端**里用 `dsh`，请安装配套的一行脚本：[dsh-desktop-global-cli](https://github.com/zhoudl0605/dsh-desktop-global-cli)——它把 shim 目录加入你的 shell profile（幂等，支持 `--uninstall`）。
 
 ## 安装
 

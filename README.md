@@ -68,9 +68,11 @@ entries.
 > writes its shims to the system PATH (upstream issue
 > [#77](https://github.com/anywhere-labs/deepseek-harness-desktop/issues/77));
 > this plugin follows the same rule and only makes them visible to agent
-> commands inside the host. If you want `dsh` in your own Terminal, add the
-> printed shim directory to your shell profile yourself — see
-> `dsh --help` inside the tray terminal.
+> commands inside the host. To use `dsh` in your **own terminals**, install
+> the companion one-liner:
+> [dsh-desktop-global-cli](https://github.com/zhoudl0605/dsh-desktop-global-cli)
+> — it adds the shim directory to your shell profile (idempotent, with
+> `--uninstall`).
 
 ## Install
 
