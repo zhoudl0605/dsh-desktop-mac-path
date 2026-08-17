@@ -62,8 +62,8 @@ DSH Desktop tray, open **Open DSH Terminal** and run:
 # once published to npm
 dsh plugin --profile desktop add dsh-desktop-mac-path
 
-# or straight from this repository
-dsh plugin --profile desktop add github:zhoudl0605/dsh-desktop-mac-path
+# or pinned to the latest release tag
+dsh plugin --profile desktop add github:zhoudl0605/dsh-desktop-mac-path#v0.1.0
 ```
 
 Then **restart DSH Desktop** so the plugin enters the Loader composition.
@@ -107,12 +107,14 @@ documentation](https://github.com/anywhere-labs/deepseek-harness-desktop/blob/ma
 ## Development
 
 ```sh
+npm install
 node --test lib/
 ```
 
-No build step and zero runtime dependencies — the `@deepseek-ai/*` packages
-are not published to the public npm registry, so this plugin deliberately
-never imports them at runtime.
+No build step. The only runtime dependency is
+[`@deepseek-ai/schemastery`](https://www.npmjs.com/package/@deepseek-ai/schemastery)
+(published on the public npm registry) for the static `Config` schema,
+following the [DSH "配置与发布" conventions](https://deepseekdocs.com/docs/learn/dev/config-publish).
 
 ## References
 

@@ -1,10 +1,17 @@
 /**
  * dsh-desktop-mac-path type declarations.
- * The plugin has zero runtime dependencies; types are hand-written.
+ * Runtime dependency: `@deepseek-ai/schemastery` (for the Config schema).
  */
+
+import type z from "@deepseek-ai/schemastery";
 
 export declare const name: "desktop-mac-path";
 export declare const inject: never[];
+
+export declare const Config: z.ObjectType<{
+	extraPaths: z.ArrayType<z.StringType>;
+	restoreSystemPaths: z.BooleanType;
+}>;
 
 export interface MacPathConfig {
 	/** Replicate `path_helper` from `/etc/paths` + `/etc/paths.d/` (darwin only). Defaults to true. */

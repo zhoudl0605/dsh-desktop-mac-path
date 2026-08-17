@@ -22,6 +22,9 @@
   "engines": {
     "node": ">=18"
   },
+  "dependencies": {
+    "@deepseek-ai/schemastery": "^3.18.1"
+  },
   "scripts": {
     "test": "node --test lib/"
   },

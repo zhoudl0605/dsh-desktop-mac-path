@@ -36,8 +36,8 @@ DSH 的 subprocess 服务每次 spawn 都会重新快照 `process.env`（`scrubb
 # 发布到 npm 后
 dsh plugin --profile desktop add dsh-desktop-mac-path
 
-# 或直接从本仓库安装
-dsh plugin --profile desktop add github:zhoudl0605/dsh-desktop-mac-path
+# 或固定到最新 release 标签
+dsh plugin --profile desktop add github:zhoudl0605/dsh-desktop-mac-path#v0.1.0
 ```
 
 然后**重启 DSH Desktop**，让插件进入 Loader 组合。在任意 agent 会话里验证：
@@ -73,10 +73,11 @@ Apple Silicon 上零配置即可用（会自动读取 `/etc/paths.d/homebrew`）
 ## 开发
 
 ```sh
+npm install
 node --test lib/
 ```
 
-无构建步骤，运行时零依赖——`@deepseek-ai/*` 包未发布到公共 npm registry，所以本插件刻意不在运行时 import 它们。
+无构建步骤。唯一运行时依赖是 [`@deepseek-ai/schemastery`](https://www.npmjs.com/package/@deepseek-ai/schemastery)（公共 npm registry 上发布）——用于定义静态 `Config` schema，遵循 [DSH「配置与发布」规范](https://deepseekdocs.com/docs/learn/dev/config-publish)。
 
 ## 参考
 
