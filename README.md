@@ -1,9 +1,10 @@
-# dsh-plugin-desktop-path
+# dsh-mac-path
 
-Restore the **login-shell PATH** for agent shell commands running inside a
-GUI-launched DSH host (DSH Desktop, `dsh web` started from Finder/Dock).
+Restore the **macOS login-shell PATH** (Homebrew, `/etc/paths.d`, …) for
+agent shell commands running inside a GUI-launched DSH host (DSH Desktop,
+`dsh web` started from Finder/Dock, …).
 
-## The problem
+## The problem (macOS-specific)
 
 macOS launches GUI applications with a minimal PATH
 (`/usr/bin:/bin:/usr/sbin:/sbin`) because they never source the shell
@@ -17,6 +18,13 @@ $ gh --version
 bash: gh: command not found
 ```
 
+This is **not** caused by DSH Desktop: the app never modifies PATH (it only
+generates private `dsh`/`pnpm`/`node` shims for its own terminal). The same
+problem hits any DSH host launched from Finder/Dock, or any other macOS GUI
+app that spawns shells. Windows is unaffected (GUI apps inherit the full
+user PATH from the registry) and Linux is generally unaffected (GUI apps get
+the systemd user-session PATH).
+
 ## What this plugin does
 
 When it loads, the plugin prepends the missing directories to
@@ -26,7 +34,8 @@ When it loads, the plugin prepends the missing directories to
    by reading `/etc/paths` and every file in `/etc/paths.d/` (sorted by
    name) — exactly the directories your Terminal would have.
 2. **Configured entries**: `extraPaths` for anything else
-   (`/opt/homebrew/bin` on Apple Silicon, `/usr/local/bin` on Intel, …).
+   (`/opt/homebrew/bin` on Apple Silicon, `/usr/local/bin` on Intel, …),
+   which is also the only mechanism used on non-macOS platforms.
 
 DSH's subprocess service snapshots `process.env` for every spawn
 (`scrubbedParentEnv()`), so **every subsequent agent command** sees the
@@ -40,10 +49,10 @@ DSH Desktop tray, open **Open DSH Terminal** and run:
 
 ```sh
 # once published to npm
-dsh plugin --profile desktop add dsh-plugin-desktop-path
+dsh plugin --profile desktop add dsh-mac-path
 
 # or straight from this repository
-dsh plugin --profile desktop add github:zhoudl0605/dsh-plugin-desktop-path
+dsh plugin --profile desktop add github:zhoudl0605/dsh-mac-path
 ```
 
 Then **restart DSH Desktop** so the plugin enters the Loader composition.
@@ -62,7 +71,7 @@ it in your profile's `cordis.patch.yml` (see the [DSH plugin
 documentation](https://github.com/anywhere-labs/deepseek-harness-desktop/blob/master/docs/plugin-development.md)):
 
 ```yaml
-- id: desktop-path
+- id: mac-path
   config:
     extraPaths:
       - /opt/homebrew/bin
